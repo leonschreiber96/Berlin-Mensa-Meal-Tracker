@@ -4,11 +4,10 @@ A Telegram bot built using Deno that engages me daily to track what I had in Men
 It uses OpenAI's API to match the user's description of their lunch with the actual menu (provided by [my Mensa API](https://mensa.leonschreiber.de)) and logs the results.
 
 ## Features 🚀
-- **Daily Meal Check**: The bot asks once per day whether I had lunch at a mensa and logs their responses.
-- **Menu Matching with AI**: User-described meals are matched with the menu using OpenAI's GPT 4o model.
+- **Daily Meal Check**: The bot asks once per day whether I had lunch at a mensa and logs the response.
+- **Menu Matching with AI**: Natural-language-described meals are matched with the menu using OpenAI's GPT 4o model.
 - **Canteen Selection**: Supports multiple canteens with predefined IDs (see https://mensa.leonschreiber.de/api/canteens).
-- **Data Persistence**: Saves user responses to a file for record-keeping and analysis.
-- **Scheduled Cron Job**: Asks users about their meals at a random time between 15:00 and 20:00 every day.
+- **Scheduling**: Asks me at a random time between 15:00 and 20:00 every day.
 
 ## Tech Stack 🛠️
 - **Deno**: Runtime for the bot and scheduling.
