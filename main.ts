@@ -1,4 +1,4 @@
-import { TelegramBot, UpdateType } from "https://deno.land/x/telegram_bot_api@0.4.0/mod.ts"
+import { TelegramBot, UpdateType } from "https://deno.land/x/telegram_bot_api@0.4.0/mod.ts";
 import OpenAI from "https://deno.land/x/openai@v4.69.0/mod.ts";
 import "jsr:@std/dotenv/load";
 
@@ -39,11 +39,11 @@ let mensaId = 0;
 let userResponse: { date: string, mensa: string, userResponse: string, matchedItem: Record<string, { name: string, price: number }[]> } | undefined;
 
 try {
-   await Deno.readTextFile(DATA_FILE);
+   Deno.readTextFileSync(DATA_FILE);
 } catch (error) {
    if (error instanceof Deno.errors.NotFound) {
       console.log("No existing data file found. Creating one...");
-      await saveData();
+      await saveData(true);
    } else {
       console.error("Error reading data file:", error);
    }
@@ -56,7 +56,12 @@ function resetConversation() {
    userResponse = undefined;
 }
 
-async function saveData() {
+async function saveData(createNew = false) {
+   if (createNew) {
+      await Deno.writeTextFile(DATA_FILE!, JSON.stringify([], null, 2));
+      return;
+   }
+
    const fullData = JSON.parse(Deno.readTextFileSync(DATA_FILE!));
    fullData.push(userResponse);
    await Deno.writeTextFile(DATA_FILE!, JSON.stringify(fullData, null, 2));
