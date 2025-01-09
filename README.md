@@ -1,6 +1,6 @@
 # Berlin Mensa Meal Tracker Bot 🥗🤖
 
-A Telegram bot built using Deno that engages me daily to track what they had in Mensa for lunch. 
+A Telegram bot built using Deno that engages me daily to track what I had in Mensa for lunch that day (incl. prices).
 It uses OpenAI's API to match the user's description of their lunch with the actual menu (provided by [my Mensa API](https://mensa.leonschreiber.de)) and logs the results.
 
 ## Features 🚀
