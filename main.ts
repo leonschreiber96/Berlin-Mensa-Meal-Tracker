@@ -266,7 +266,7 @@ bot.on(UpdateType.CallbackQuery, async ({ callback_query }) => {
    mensaId = mensa.id;
    if (userResponse) userResponse.mensa = mensa.name;
 
-   bot.answerCallbackQuery({ callback_query_id: callback_query.id });
+   await bot.answerCallbackQuery({ callback_query_id: callback_query.id });
 
    await askWhatUserHad(callback_query.from.id);
 });
@@ -280,6 +280,7 @@ bot.on(UpdateType.CallbackQuery, async ({ callback_query }) => {
 
    if (data === 'correct') {
       await bot.sendMessage({ chat_id: from.id, text: 'Great! Thanks for confirming!' });
+      await saveData();
       resetConversation();
    } else if (data === 'incorrect') {
       await bot.sendMessage({ chat_id: from.id, text: 'Oops! Let\'s try again.' });
