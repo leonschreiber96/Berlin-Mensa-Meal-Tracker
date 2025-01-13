@@ -10,7 +10,7 @@ COPY ./* ./
 RUN deno compile --output /app/main --allow-net --allow-read --allow-write --allow-env --unstable-cron --env-file main.ts
 
 # Stage 2: Run
-FROM gcr.io/distroless/cc
+FROM alpine:latest
 
 COPY --from=builder /app/main /
 

@@ -42,7 +42,7 @@ try {
    Deno.readTextFileSync(DATA_FILE);
 } catch (error) {
    if (error instanceof Deno.errors.NotFound) {
-      console.log("No existing data file found. Creating one...");
+      console.log("No existing data file found.");
       await saveData(true);
    } else {
       console.error("Error reading data file:", error);
@@ -57,14 +57,19 @@ function resetConversation() {
 }
 
 async function saveData(createNew = false) {
+   console.log("Saving data...");
    if (createNew) {
+      console.log("Creating new data file...");
       await Deno.writeTextFile(DATA_FILE!, JSON.stringify([], null, 2));
       return;
    }
 
    const fullData = JSON.parse(Deno.readTextFileSync(DATA_FILE!));
+   console.log("Full data length:", fullData.length);
    fullData.push(userResponse);
    await Deno.writeTextFile(DATA_FILE!, JSON.stringify(fullData, null, 2));
+
+   console.log("Data saved!");
 }
 
 async function getGPTMatch(menu: MensaMenu, userResponse: string): Promise<Record<string, {name: string, price: number}[]>> {
